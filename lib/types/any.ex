@@ -25,15 +25,15 @@ end
 # end
 
 defimpl Semigroup, for: Types.Any do
-  import Types.Any
-  def concat(%{value: value}, %{value: other}) do
-    new(value || other)
+  alias Types.Any, as: Any
+  def concat(%Any{value: value}, %Any{value: other}) do
+    Any.new(value || other)
   end
 end
 
 defimpl Monoid, for: Types.Any do
-  import Types.Any
-  def empty(_) do
-    new(false)
+  alias Types.Any, as: Any
+  def empty(%Any{}) do
+    Any.new(false)
   end
 end

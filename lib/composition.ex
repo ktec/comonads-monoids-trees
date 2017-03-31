@@ -43,16 +43,32 @@ defmodule Composition do
   #   Foldable.reduce(tree, fn (acc, x) -> acc || x end, false)
   # end
 
+  # @spec changed(Foldable.t) :: any
+  # def changed(tree) do
+  #   alias Types.Any, as: Any
+  #   %Any{value: value} = tree |> Functor.map(&Any.new/1) |> fold()
+  #   value
+  # end
+  #
+  # @spec fold(Foldable.t) :: any
+  # def fold(%{annotation: ann} = foldable) do
+  #   Foldable.reduce(foldable, &Semigroup.concat/2, Monoid.empty(ann))
+  # end
+
+  alias Types.Any, as: Any
+
   @spec changed(Foldable.t) :: any
   def changed(tree) do
-    alias Types.Any, as: Any
-    %Any{value: value} = tree |> Functor.map(&Any.new/1) |> fold()
+    %Any{value: value} = foldMap(&Any.new/1, tree)
     value
   end
 
-  @spec fold(Foldable.t) :: any
-  def fold(%{annotation: ann} = foldable) do
-    Foldable.reduce(foldable, &Semigroup.concat/2, Monoid.empty(ann))
+  def foldMap(f, %{annotation: ann} = foldable) do
+    Foldable.reduce(
+      foldable,
+      fn (acc, x) -> Semigroup.concat(acc, f.(x)) end,
+      Monoid.empty(f.(ann))
+    )
   end
 
   def create_tree do
