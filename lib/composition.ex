@@ -37,32 +37,18 @@ defmodule Composition do
 
 
   """
-
-  # @spec changed(Foldable.t) :: any
-  # def changed(tree) do
-  #   Foldable.reduce(tree, fn (acc, x) -> acc || x end, false)
-  # end
-
-  # @spec changed(Foldable.t) :: any
-  # def changed(tree) do
-  #   alias Types.Any, as: Any
-  #   %Any{value: value} = tree |> Functor.map(&Any.new/1) |> fold()
-  #   value
-  # end
-  #
-  # @spec fold(Foldable.t) :: any
-  # def fold(%{annotation: ann} = foldable) do
-  #   Foldable.reduce(foldable, &Semigroup.concat/2, Monoid.empty(ann))
-  # end
+  # TODO: investigate this further...
+  # import Foldable.Guard
 
   alias Types.Any, as: Any
 
   @spec changed(Foldable.t) :: any
-  def changed(tree) do
-    %Any{value: value} = foldMap(&Any.new/1, tree)
-    value
-  end
+  def changed(tree), do: fold(tree).value
 
+  @spec fold(Foldable.t) :: any
+  def fold(foldable), do: foldMap(&Any.new/1, foldable)
+
+  @spec foldMap(fun, Foldable.t) :: any
   def foldMap(f, %{annotation: ann} = foldable) do
     Foldable.reduce(
       foldable,
