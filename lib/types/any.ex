@@ -1,4 +1,5 @@
 defmodule Types.Any do
+
   keys = [:value]
   @enforce_keys keys
   defstruct keys
@@ -24,14 +25,14 @@ end
 #   end
 # end
 
-defimpl Semigroup, for: Types.Any do
+defimpl Protocols.Semigroup, for: Types.Any do
   alias Types.Any, as: Any
   def concat(%Any{value: value}, %Any{value: other}) do
     Any.new(value || other)
   end
 end
 
-defimpl Monoid, for: Types.Any do
+defimpl Protocols.Monoid, for: Types.Any do
   alias Types.Any, as: Any
   def empty(%Any{}) do
     Any.new(false)

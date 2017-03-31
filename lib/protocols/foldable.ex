@@ -1,4 +1,4 @@
-defmodule Foldable.Guard do
+defmodule Protocols.Foldable.Guard do
   defmacro is_foldable(maybe_foldable) do
     case Macro.Env.in_guard? __CALLER__ do
       true -> quote do
@@ -11,7 +11,7 @@ defmodule Foldable.Guard do
   end
 end
 
-defprotocol Foldable do
+defprotocol Protocols.Foldable do
   @moduledoc """
   A Foldable type is also a container.
   """

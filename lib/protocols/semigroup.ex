@@ -1,4 +1,4 @@
-defprotocol Semigroup do
+defprotocol Protocols.Semigroup do
   @moduledoc """
   A semigroup is concatable.
   """

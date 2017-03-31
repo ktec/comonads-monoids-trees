@@ -1,3 +1,5 @@
+alias Protocols
+
 defmodule Composition do
   @moduledoc """
   Documentation for Composition.
@@ -28,7 +30,7 @@ defmodule Composition do
               },
         right: %Leaf{annotation: true, value: 3}
       }
-      iex> Comonad.extend(b2, &Composition.changed/1)
+      iex> Protocols.Comonad.extend(b2, &Composition.changed/1)
       %Branch{annotation: true,
         left: %Branch{annotation: false,
          left: %Leaf{annotation: false, value: 1},
@@ -40,6 +42,11 @@ defmodule Composition do
   # TODO: investigate this further...
   # import Foldable.Guard
 
+  alias Protocols.{
+    Semigroup,
+    Monoid,
+    Foldable,
+  }
   alias Types.Any, as: Any
 
   @spec changed(Foldable.t) :: any

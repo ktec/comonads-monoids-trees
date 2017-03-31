@@ -1,8 +1,8 @@
-defprotocol Monoid do
+defprotocol Protocols.Monoid do
   @moduledoc """
   A monoid is a semigroup with empty.
   """
-  
+
   @type t :: any
 
   @spec empty(t) :: t

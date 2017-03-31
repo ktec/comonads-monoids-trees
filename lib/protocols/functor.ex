@@ -1,4 +1,4 @@
-defprotocol Functor do
+defprotocol Protocols.Functor do
   @type t :: any
   @type element :: any
 

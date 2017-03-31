@@ -1,4 +1,8 @@
-defprotocol Comonad do
+defprotocol Protocols.Comonad do
+  @moduledoc """
+  A branch.
+  """
+
   @type t :: any
   @type element :: any
 
