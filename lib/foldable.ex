@@ -6,6 +6,6 @@ defprotocol Foldable do
   @type t :: any
   @type element :: any
 
-  @spec reduce(Foldable.t, (element -> any), any) :: any
+  @spec reduce(t, (element -> any), any) :: any
   def reduce(data, fun, acc)
 end

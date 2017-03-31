@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :comonads, key: :value
+#     config :composition, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:comonads, :key)
+#     Application.get_env(:composition, :key)
 #
 # Or configure a 3rd-party app:
 #

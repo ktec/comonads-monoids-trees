@@ -3,8 +3,6 @@ defmodule Leaf do
   A leaf.
   """
 
-  alias Functor
-
   keys = [:value, :annotation]
   @enforce_keys keys
   defstruct keys
@@ -24,15 +22,23 @@ defmodule Leaf do
   end
 end
 
+# defimpl Inspect, for: Leaf do
+#   def inspect(%{value: value, annotation: ann}, _) do
+#     "Leaf(#{value}, #{ann})"
+#   end
+# end
+
 defimpl Functor, for: Leaf do
+  import Leaf
   def map(%{value: value, annotation: ann}, f) do
-    Leaf.new(value, f.(ann))
+    new(value, f.(ann))
   end
 end
 
 defimpl Comonad, for: Leaf do
+  import Leaf
   def extend(%{value: value, annotation: ann}, f) do
-    Leaf.new(value, f.(Leaf.new(value, ann)))
+    new(value, f.(new(value, ann)))
   end
 end
 
